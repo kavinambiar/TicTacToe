@@ -17,9 +17,18 @@ namespace TicTacToe
             BuildWebHost(args).Run();
         }
 
+        //public static IWebHost BuildWebHost(string[] args) =>
+        //    WebHost.CreateDefaultBuilder(args)
+        //        .UseStartup<Startup>()
+        //        .Build();
+
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+            .CaptureStartupErrors(true) //Capture errors during server startup. Displays error page.
+            .UseStartup<Startup>()
+            .PreferHostingUrls(true) //Indicates that the host should listen on specific URLs you have provided
+            .UseUrls("http://localhost:5000")
+            .UseApplicationInsights()
+            .Build();
     }
 }
