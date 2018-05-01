@@ -7,6 +7,23 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using TicTacToe.Services;
+using TicTacToe.Extensions;
+using Microsoft.AspNetCore.Routing;
+
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.Extensions.Configuration;
+
+using Microsoft.AspNetCore.Mvc.Formatters;
+
+using Microsoft.EntityFrameworkCore;
+
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
+using System.Diagnostics;
+
 
 namespace TicTacToe
 {
@@ -35,12 +52,16 @@ namespace TicTacToe
 
             app.UseStaticFiles();
 
+            app.UseCommunicationMiddleware();
+            
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                   name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
 
 
             //app.Run(async (context) =>
