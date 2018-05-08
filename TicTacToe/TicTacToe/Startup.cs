@@ -35,6 +35,10 @@ namespace TicTacToe
         {
             services.AddMvc();
             services.AddSingleton<IUserService, UserService>();
+
+            services.AddDirectoryBrowser();
+
+            //services.AddRouting();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,12 +51,15 @@ namespace TicTacToe
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                //app.UseExceptionHandler("/Home/Error");
+                app.UseStatusCodePages("text/plain", "HTTP Error - Status Code: {0}");
             }
 
             app.UseStaticFiles();
 
             app.UseCommunicationMiddleware();
+
+            //app.UseDirectoryBrowser();
             
 
             app.UseMvc(routes =>
